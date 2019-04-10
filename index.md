@@ -1,7 +1,7 @@
 ## Inyección de dependencias
 ### Introducción
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+  Es un patrón de diseño orientado a objetos, en el que se suministran objetos a una clase en lugar de ser la propia clase la que cree dichos objetos. Esos objetos cumplen contratos que necesitan nuestras clases para poder funcionar (de ahí el concepto de dependencia). Nuestras clases no crean los objetos que necesitan, sino que se los suministra otra clase 'contenedora' que inyectará la implementación deseada a nuestro contrato.
 
 ```markdown
 Syntax highlighted code block
