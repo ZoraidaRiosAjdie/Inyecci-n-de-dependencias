@@ -5,23 +5,96 @@
   Un ejemplo sencillo
 
 ```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+public class ServicioImpresion {
+  ServicioEnvio servicioA;
+  ServicioPDF servicioB;
+  
+       public ServicioImpresion() {
+    
+    this.servicioA= new ServicioEnvio();
+    this.servicioB= new ServicioPDF();
+  }
+  public void imprimir() {
+    
+    servicioA.enviar();
+    servicioB.pdf();
+  }
+}
 ```
+```markdown
+public class ServicioEnvio {
+  public void enviar() {
+    
+    System.out.println("enviando el documento a imprimir");
+  }
+}
+```
+```markdown
+public class ServicioPDF {
+  public void pdf() {
+    
+    System.out.println("imprimiendo el documento en formato pdf");
+  }
+}
+```
+Se puede realizar la misma operación inyectando las dependencias al ServicioImpresión y que no sea él el que tenga que definirlas en el constructor.
 
+Este parece en principio un cambio sin importancia, el código quedaría:
+```markdown
+package com.arquitecturajava.parte3;
+public class ServicioImpresion {
+  ServicioEnvio servicioA;
+  ServicioPDF servicioB;
+  
+  public ServicioImpresion(ServicioEnvio servicioA,ServicioPDF servicioB) {
+    
+    this.servicioA= servicioA;
+    this.servicioB= servicioB;
+  }
+  public void imprimir() {
+    
+    servicioA.enviar();
+    servicioB.pdf();
+  }
+}
+```
+```markdown
+public class Principal {
+  public static void main(String[] args) {
+  
+         ServicioImpresion miServicio=
+         new ServicioImpresion(new ServicioEnvio(),new ServicioPDF());
+    
+  miServicio.imprimir();
+  }
+}
+```
+El resultado sigue siendo el mismo. Acabamos de inyectar las dependencias en el servicio desde nuestro programa main . ¿Qué ventajas aporta esto? . La realidad es que en principio parece que ninguna . Pero hay algo que ha cambiado ya no es el propio servicio el responsable de definir sus dependencias sino que lo es el programa principal.  Esto abre las puertas a la extensibilidad. Es decir ¿tenemos nosotros siempre que inyectar las mismas dependencias al servicio?. La respuesta parece obvia… claro que sí están ya definidas. Sin embargo la respuesta es NO , nosotros podemos cambiar el tipo de dependencia que inyectamos , simplemente extendiendo una de nuestras clases y cambiando el comportamiento, vamos a verlo.
+```markdown
+public class ServicioEnvioAspecto extends ServicioEnvio {
+  @Override
+  public void enviar() {
+    
+  System.out.println("haciendo log del correo que vamos a enviar");
+    
+  super.enviar();
+  }
+  
+}
+```
+Acabamos de crear una clase que extiende ServicioEnvio y añade una funcionalidad adicional de log que hace un “log” del correo que enviamos . Ahora es tan sencillo como decirle al programa principal que cuando inyecte la dependencia no inyecte el ServicioEnvio sino el ServicioEnvioAspecto de esta forma habremos cambiado el comportamiento de forma considerable.
+```markdown
+public class ServicioEnvioAspecto extends ServicioEnvio {
+  @Override
+  public void enviar() {
+    
+  System.out.println("haciendo log del correo que vamos a enviar");
+    
+  super.enviar();
+  }
+  
+}
+```
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
 ### Jekyll Themes
