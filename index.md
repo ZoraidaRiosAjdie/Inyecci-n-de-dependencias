@@ -120,12 +120,3 @@ public class ServicioEnvioAspecto extends ServicioEnvio {
 Acabamos de modificar el comportamiento de nuestro programa de forma significativa gracias al uso del concepto de inyección de dependencia.
 
 La inyección de dependencia nos permite inyectar otras clases y añadir funcionalidad transversal a medida. Este patrón de diseño es el que abre la puerta a frameworks como Spring utilizando el concepto de inyección de dependencia de una forma más avanzada. En estos framework los aspectos que se añaden a nuestras clases son múltiples y la complejidad alta.
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ZoraidaRiosAjdie/Inyecci-n-de-dependencias/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
